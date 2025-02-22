@@ -1,0 +1,34 @@
+-- Create a database
+CREATE DATABASE Company;
+
+-- Use Company database
+USE Company;
+
+-- Create tables
+CREATE TABLE Department (
+    DeptID INT PRIMARY KEY AUTO_INCREMENT,
+    DeptName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Employee (
+    EmpID INT PRIMARY KEY AUTO_INCREMENT,
+    EmpName VARCHAR(100) NOT NULL,
+    EmpDeptID INT,
+    FOREIGN KEY (EmpDeptID) REFERENCES Department(DeptID)
+);
+
+-- Insert data
+INSERT INTO Department (DeptName) VALUES ('Engineering');
+INSERT INTO Department (DeptName) VALUES ('Sales');
+
+INSERT INTO Employee (EmpName, EmpDeptID) VALUES ('John Doe', 1)   ;
+INSERT INTO Employee (EmpName, EmpDeptID) VALUES ('Jane Smith', 2);
+
+-- Select data from database
+SELECT * FROM Department;
+SELECT * FROM Employee;
+
+-- Perform an inner join to combine data from two tables
+SELECT Employee.EmpID, Employee.EmpName, Department.DeptName
+FROM Employee
+JOIN Department ON Employee.EmpDeptID = Department.DeptID;
